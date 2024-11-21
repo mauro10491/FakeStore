@@ -29,7 +29,7 @@ fun NavManager(loginViewModel: LoginViewModel, productsViewModel: ProductsViewMo
             navArgument("id") { type = NavType.IntType }
         )){
             val id = it.arguments?.getInt("id") ?: 0
-            ProductDetailView(navController, productsViewModel, id)
+            ProductDetailView(navController, productsViewModel, id, loginViewModel)
         }
     }
 }
