@@ -1,5 +1,6 @@
 package com.example.fakestore.viewModel
 
+import android.content.Context
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
@@ -24,12 +25,18 @@ class LoginViewModel @Inject constructor(private val repository: FakeStoreReposi
     var isLoading by mutableStateOf(false)
         private set
 
-    fun login(username: String, password: String){
+    fun login(username: String, password: String, context: Context){
         isLoading = true
         viewModelScope.launch {
             withContext(Dispatchers.IO){
                 try {
                     token = repository.login(username, password)
+
+                    token?.let { token ->
+                        saveUserSession(context, token)
+                    } ?: run {
+                        throw Exception("Token no recibido")
+                    }
                 }catch (e: Exception){
                     errorMessage = "Login failed: ${e.message}"
                 } finally {
@@ -37,5 +44,25 @@ class LoginViewModel @Inject constructor(private val repository: FakeStoreReposi
                 }
             }
         }
+    }
+
+    fun logOut(context: Context){
+        val sharedPreferences = context.getSharedPreferences("UserSession", Context.MODE_PRIVATE)
+        val editor = sharedPreferences.edit()
+        editor.clear()
+        editor.apply()
+        token = null
+    }
+
+    private fun saveUserSession(context: Context, token: String){
+        val sharedPreferences = context.getSharedPreferences("UserSession", Context.MODE_PRIVATE)
+        val editor = sharedPreferences.edit()
+        editor.putString("userToken", token)
+        editor.apply()
+    }
+
+    fun loadUserSession(context: Context){
+        val sharedPreferences = context.getSharedPreferences("UserSession", Context.MODE_PRIVATE)
+        token = sharedPreferences.getString("userToken", null)
     }
 }

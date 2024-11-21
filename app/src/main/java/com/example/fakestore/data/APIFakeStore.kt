@@ -20,5 +20,5 @@ interface APIFakeStore {
     @GET(ENDPOINTPRODUCTS)
     suspend fun getProducts(): Response<List<ProductsModel>>
 
-    
+
 }

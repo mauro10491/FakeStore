@@ -22,7 +22,7 @@ fun NavManager(loginViewModel: LoginViewModel, productsViewModel: ProductsViewMo
             navArgument("token") { type = NavType.StringType }
         )) {
             val token = it.arguments?.getString("token") ?: ""
-            ProductsView(token, productsViewModel)
+            ProductsView(token, productsViewModel, loginViewModel, navController)
         }
     }
 }

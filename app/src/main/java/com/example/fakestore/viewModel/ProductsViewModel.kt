@@ -31,5 +31,4 @@ class ProductsViewModel @Inject constructor(private val repository: FakeStoreRep
             }
         }
     }
-
 }
