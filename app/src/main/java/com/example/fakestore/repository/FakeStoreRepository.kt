@@ -20,4 +20,12 @@ class FakeStoreRepository @Inject constructor(private val apiFakeStore: APIFakeS
         return null
     }
 
+    suspend fun getProductById(id: Int): ProductsModel? {
+        val response = apiFakeStore.getProductById(id)
+        if (response.isSuccessful){
+            return response.body()
+        }
+        return null
+    }
+
 }
