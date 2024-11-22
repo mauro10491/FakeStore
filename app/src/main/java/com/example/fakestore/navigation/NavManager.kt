@@ -10,6 +10,7 @@ import androidx.navigation.navArgument
 import com.example.fakestore.viewModel.CategoriesViewModel
 import com.example.fakestore.viewModel.LoginViewModel
 import com.example.fakestore.viewModel.ProductsViewModel
+import com.example.fakestore.viewModel.UserViewModel
 import com.example.fakestore.views.categories.CategoriesView
 import com.example.fakestore.views.Login.LoginView
 import com.example.fakestore.views.UserPerfil.UserPerfilView
@@ -24,7 +25,8 @@ import com.example.fakestore.views.products.ProductsView
 fun NavManager(
     loginViewModel: LoginViewModel,
     productsViewModel: ProductsViewModel,
-    categoriesViewModel: CategoriesViewModel
+    categoriesViewModel: CategoriesViewModel,
+    userViewModel: UserViewModel
     ){
     val navController = rememberNavController()
     NavHost(navController, startDestination = "LoginView"){
@@ -47,7 +49,7 @@ fun NavManager(
             CategoriesView(categoriesViewModel, navController, loginViewModel)
         }
         composable("UserPerfilView"){
-            UserPerfilView()
+            UserPerfilView(userViewModel, 1, loginViewModel, navController, )
         }
         composable("CategoryDetailsView/{name}", arguments = listOf(
             navArgument("name") { type = NavType.StringType }
@@ -56,10 +58,10 @@ fun NavManager(
             Log.d("Category", "Received category: $name")
 
             when(name){
-                "electronics" -> Electronics(name)
-                "jewelery" -> Jewelery(name)
-                "men's clothing" -> Mensclothing(name)
-                "women's clothing" -> WomensClothing(name)
+                "electronics" -> Electronics(name, loginViewModel, navController)
+                "jewelery" -> Jewelery(name, loginViewModel, navController)
+                "men's clothing" -> Mensclothing(name, loginViewModel, navController)
+                "women's clothing" -> WomensClothing(name, loginViewModel, navController)
             }
         }
     }

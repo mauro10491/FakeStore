@@ -1,12 +1,13 @@
 package com.example.fakestore.data
 
-import com.example.fakestore.model.CategoriesModel
 import com.example.fakestore.model.LoginRequest
 import com.example.fakestore.model.LoginResponse
 import com.example.fakestore.model.ProductsModel
+import com.example.fakestore.model.UserModel
 import com.example.fakestore.util.Constants.Companion.ENDPOINTCATEGORIES
 import com.example.fakestore.util.Constants.Companion.ENDPOINTLOGIN
 import com.example.fakestore.util.Constants.Companion.ENDPOINTPRODUCTS
+import com.example.fakestore.util.Constants.Companion.ENDPOINTUSER
 import retrofit2.Response
 import retrofit2.http.Body
 import retrofit2.http.GET
@@ -30,4 +31,8 @@ interface APIFakeStore {
     //Categories
     @GET(ENDPOINTCATEGORIES)
     suspend fun getCategories(): Response<List<String>>
+
+    //User
+    @GET("$ENDPOINTUSER/{id}")
+    suspend fun getUser(@Path(value = "id")id: Int) : Response<UserModel>
 }

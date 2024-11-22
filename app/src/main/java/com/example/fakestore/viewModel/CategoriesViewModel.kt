@@ -5,7 +5,6 @@ import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.fakestore.model.CategoriesModel
 import com.example.fakestore.model.ProductsModel
 import com.example.fakestore.repository.FakeStoreRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
