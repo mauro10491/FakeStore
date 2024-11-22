@@ -44,6 +44,7 @@ import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavController
 import coil.compose.rememberImagePainter
 import com.example.fakestore.model.ProductsModel
 import kotlinx.coroutines.launch
@@ -209,7 +210,10 @@ fun MainImage(image: String){
 
 //COMPONENTE PARA MENU LATERAL
 @Composable
-fun DrawerContent(onLogoutClick: () -> Unit) {
+fun DrawerContent(
+    onLogoutClick: () -> Unit,
+    navController: NavController
+) {
     Box(
         modifier = Modifier
             .fillMaxHeight()
@@ -250,14 +254,13 @@ fun DrawerContent(onLogoutClick: () -> Unit) {
 
             DrawerMenuItem(icon = Icons.Default.Home, title = "Inicio") {
             }
-
             DrawerMenuItem(icon = Icons.Default.Star, title = "Categorias") {
+                navController.navigate("CategoriesView")
             }
-
             DrawerMenuItem(icon = Icons.Default.ShoppingCart, title = "Compras") {
             }
-
             DrawerMenuItem(icon = Icons.Default.Person, title = "Perfil") {
+                navController.navigate("UserPerfilView")
             }
 
             Spacer(modifier = Modifier.weight(1f))

@@ -1,8 +1,10 @@
 package com.example.fakestore.data
 
+import com.example.fakestore.model.CategoriesModel
 import com.example.fakestore.model.LoginRequest
 import com.example.fakestore.model.LoginResponse
 import com.example.fakestore.model.ProductsModel
+import com.example.fakestore.util.Constants.Companion.ENDPOINTCATEGORIES
 import com.example.fakestore.util.Constants.Companion.ENDPOINTLOGIN
 import com.example.fakestore.util.Constants.Companion.ENDPOINTPRODUCTS
 import retrofit2.Response
@@ -24,4 +26,8 @@ interface APIFakeStore {
     //Products by id
     @GET("$ENDPOINTPRODUCTS/{id}")
     suspend fun getProductById(@Path(value = "id")id: Int): Response<ProductsModel>
+
+    //Categories
+    @GET(ENDPOINTCATEGORIES)
+    suspend fun getCategories(): Response<List<String>>
 }

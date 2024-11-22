@@ -10,6 +10,7 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.ui.Modifier
 import com.example.fakestore.navigation.NavManager
 import com.example.fakestore.ui.theme.FakeStoreTheme
+import com.example.fakestore.viewModel.CategoriesViewModel
 import com.example.fakestore.viewModel.LoginViewModel
 import com.example.fakestore.viewModel.ProductsViewModel
 import dagger.hilt.android.AndroidEntryPoint
@@ -20,11 +21,12 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         val loginViewModel : LoginViewModel by viewModels()
         val productsViewModel : ProductsViewModel by viewModels()
+        val categoriesViewModel : CategoriesViewModel by viewModels()
         enableEdgeToEdge()
         setContent {
             FakeStoreTheme {
                 Scaffold( modifier = Modifier.fillMaxSize() ) { innerPadding ->
-                    NavManager(loginViewModel, productsViewModel)
+                    NavManager(loginViewModel, productsViewModel, categoriesViewModel)
                 }
             }
         }

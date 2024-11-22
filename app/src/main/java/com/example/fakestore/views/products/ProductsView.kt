@@ -50,7 +50,8 @@ fun ProductsView(
                     navController.navigate("LoginView"){
                         popUpTo("ProductsView") { inclusive = true }
                     }
-                }
+                },
+                navController
             )
         },
         ) {
@@ -71,7 +72,6 @@ fun ProductsView(
         }
     }
 }
-
 @Composable
 fun ContentProductsView(
     productsViewModel: ProductsViewModel,

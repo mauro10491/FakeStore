@@ -57,5 +57,17 @@ class ProductsViewModel @Inject constructor(private val repository: FakeStoreRep
         }
     }
 
+    fun clean(){
+        state = state.copy(
+            id = 0,
+            title = "",
+            price = 0.0,
+            description = "",
+            category = "",
+            image = "",
+            rating = RatingProduct( 0.0,  0)
+        )
+    }
+
 
 }
