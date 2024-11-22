@@ -18,6 +18,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
+import com.example.fakestore.components.CardProductsDetails
 import com.example.fakestore.components.DrawerContent
 import com.example.fakestore.components.MainImage
 import com.example.fakestore.components.MainTopBar
@@ -56,7 +57,7 @@ fun ProductDetailView(navController: NavController, productsViewModel: ProductsV
         Scaffold(
             topBar = {
                 MainTopBar(
-                    title = productsViewModel.state.title,
+                    title = "Fake Store",
                     showBackButton = true,
                     onMenuClick = { scope.launch { drawerState.open() } },
                     onClickBackButton = { navController.popBackStack() }
@@ -76,7 +77,12 @@ fun ContentProductDetailView(paddingValues: PaddingValues, productsViewModel: Pr
         modifier = Modifier
             .padding(paddingValues)
     ) {
-        MainImage(image = state.image)
-        Spacer(modifier = Modifier.height(10.dp))
+        CardProductsDetails(
+            image = state.image,
+            title = state.title,
+            precio = state.price,
+            categoria = state.category,
+            descripcion = state.description
+        )
     }
 }
