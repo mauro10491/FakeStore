@@ -28,8 +28,10 @@ import androidx.navigation.NavController
 import com.example.fakestore.viewModel.LoginViewModel
 
 @Composable
-fun LoginView(loginViewModel: LoginViewModel, navController: NavController){
-
+fun LoginView(
+    loginViewModel: LoginViewModel,
+    navController: NavController
+){
     var username by remember { mutableStateOf("") }
     var password by remember { mutableStateOf("") }
     var isFormValid by remember { mutableStateOf(true) }

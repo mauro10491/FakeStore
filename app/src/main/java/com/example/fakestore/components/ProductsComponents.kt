@@ -78,8 +78,12 @@ fun MainTopBar(
     )
 }
 
+//COMPONENTE PARA CARD DE PRODUCTOS
 @Composable
-fun CardProducts(product: ProductsModel, onClick: () -> Unit){
+fun CardProducts(
+    product: ProductsModel,
+    onClick: () -> Unit
+){
     Card(
         shape = RoundedCornerShape(5.dp),
         modifier = Modifier
@@ -94,6 +98,7 @@ fun CardProducts(product: ProductsModel, onClick: () -> Unit){
     }
 }
 
+//COMPONENTE PARA CARD DETAILS PRODUCTOS
 @Composable
 fun CardProductsDetails(
     image: String,
@@ -188,6 +193,7 @@ fun CardProductsDetails(
     }
 }
 
+//COMPONENTE PARA MANEJAR IMAGEN
 @Composable
 fun MainImage(image: String){
     val image = rememberImagePainter(data = image)
@@ -201,6 +207,7 @@ fun MainImage(image: String){
     )
 }
 
+//COMPONENTE PARA MENU LATERAL
 @Composable
 fun DrawerContent(onLogoutClick: () -> Unit) {
     Box(
@@ -242,19 +249,15 @@ fun DrawerContent(onLogoutClick: () -> Unit) {
             Spacer(modifier = Modifier.height(24.dp))
 
             DrawerMenuItem(icon = Icons.Default.Home, title = "Inicio") {
-                
             }
 
             DrawerMenuItem(icon = Icons.Default.Star, title = "Categorias") {
-
             }
 
             DrawerMenuItem(icon = Icons.Default.ShoppingCart, title = "Compras") {
-
             }
 
             DrawerMenuItem(icon = Icons.Default.Person, title = "Perfil") {
-
             }
 
             Spacer(modifier = Modifier.weight(1f))
@@ -276,20 +279,19 @@ fun DrawerContent(onLogoutClick: () -> Unit) {
                     Icon(imageVector = Icons.Default.ExitToApp, contentDescription = "logout", tint = Color.White)
                     Spacer(modifier = Modifier.width(12.dp))
                     Text(text = "Cerrar Sesion", color = Color.White)
-                    
                 }
             }
-
-
         }
-
     }
-
 }
 
+//COMPONENTE ITEM PARA MENU LATERAL
 @Composable
-fun DrawerMenuItem(icon: ImageVector, title: String, onClick: () -> Unit) {
-
+fun DrawerMenuItem(
+    icon: ImageVector,
+    title: String,
+    onClick: () -> Unit
+) {
     Surface(
         onClick = { onClick() },
         modifier = Modifier
@@ -313,5 +315,4 @@ fun DrawerMenuItem(icon: ImageVector, title: String, onClick: () -> Unit) {
             Text(text = title, style = MaterialTheme.typography.bodyLarge, color = MaterialTheme.colorScheme.onSurface)
         }
     }
-
 }

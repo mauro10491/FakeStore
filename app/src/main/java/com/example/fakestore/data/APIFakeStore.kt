@@ -21,6 +21,7 @@ interface APIFakeStore {
     @GET(ENDPOINTPRODUCTS)
     suspend fun getProducts(): Response<List<ProductsModel>>
 
+    //Products by id
     @GET("$ENDPOINTPRODUCTS/{id}")
     suspend fun getProductById(@Path(value = "id")id: Int): Response<ProductsModel>
 }

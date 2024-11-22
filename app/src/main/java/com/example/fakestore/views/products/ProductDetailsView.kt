@@ -28,8 +28,12 @@ import kotlinx.coroutines.launch
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
-fun ProductDetailView(navController: NavController, productsViewModel: ProductsViewModel, id: Int, loginViewModel: LoginViewModel){
-
+fun ProductDetailView(
+    navController: NavController,
+    productsViewModel: ProductsViewModel,
+    id: Int,
+    loginViewModel: LoginViewModel
+){
     val drawerState = rememberDrawerState(DrawerValue.Closed)
     val scope = rememberCoroutineScope()
     val context = LocalContext.current
@@ -70,7 +74,10 @@ fun ProductDetailView(navController: NavController, productsViewModel: ProductsV
 }
 
 @Composable
-fun ContentProductDetailView(paddingValues: PaddingValues, productsViewModel: ProductsViewModel){
+fun ContentProductDetailView(
+    paddingValues: PaddingValues,
+    productsViewModel: ProductsViewModel
+){
     val state = productsViewModel.state
 
     Column(
