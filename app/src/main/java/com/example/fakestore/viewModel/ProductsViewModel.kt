@@ -68,6 +68,4 @@ class ProductsViewModel @Inject constructor(private val repository: FakeStoreRep
             rating = RatingProduct( 0.0,  0)
         )
     }
-
-
 }

@@ -2,7 +2,9 @@ package com.example.fakestore.viewModel
 
 import androidx.compose.runtime.LongState
 import androidx.compose.runtime.State
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.fakestore.model.ProductsModel
@@ -21,6 +23,9 @@ class CategoriesViewModel @Inject constructor(private val repository: FakeStoreR
     private val _categories = MutableStateFlow<List<String>>(emptyList())
     val categories =  _categories.asStateFlow()
 
+    private val _products = MutableStateFlow<List<ProductsModel>>(emptyList())
+    val products = _products.asStateFlow()
+
     init {
         getCategories()
     }
@@ -29,6 +34,15 @@ class CategoriesViewModel @Inject constructor(private val repository: FakeStoreR
         viewModelScope.launch {
                 val result = repository.getCategories()
                 _categories.value = result ?: emptyList()
+        }
+    }
+
+    fun getProductsByCategory(category: String){
+        viewModelScope.launch {
+            withContext(Dispatchers.IO){
+                val result = repository.getProductsByCategory(category)
+                _products.value = result ?: emptyList()
+            }
         }
     }
 }

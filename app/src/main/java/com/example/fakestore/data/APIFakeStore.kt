@@ -7,6 +7,7 @@ import com.example.fakestore.model.UserModel
 import com.example.fakestore.util.Constants.Companion.ENDPOINTCATEGORIES
 import com.example.fakestore.util.Constants.Companion.ENDPOINTLOGIN
 import com.example.fakestore.util.Constants.Companion.ENDPOINTPRODUCTS
+import com.example.fakestore.util.Constants.Companion.ENDPOINTPRODUCTSCATEGORIES
 import com.example.fakestore.util.Constants.Companion.ENDPOINTUSER
 import retrofit2.Response
 import retrofit2.http.Body
@@ -31,6 +32,10 @@ interface APIFakeStore {
     //Categories
     @GET(ENDPOINTCATEGORIES)
     suspend fun getCategories(): Response<List<String>>
+
+    //Productos por categoria
+    @GET("$ENDPOINTPRODUCTSCATEGORIES/{category}")
+    suspend fun getProdcutsByCategory(@Path(value = "category")category: String) : Response<List<ProductsModel>>
 
     //User
     @GET("$ENDPOINTUSER/{id}")

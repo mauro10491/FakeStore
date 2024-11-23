@@ -58,10 +58,10 @@ fun NavManager(
             Log.d("Category", "Received category: $name")
 
             when(name){
-                "electronics" -> Electronics(name, loginViewModel, navController)
-                "jewelery" -> Jewelery(name, loginViewModel, navController)
-                "men's clothing" -> Mensclothing(name, loginViewModel, navController)
-                "women's clothing" -> WomensClothing(name, loginViewModel, navController)
+                "electronics" -> Electronics(name, loginViewModel, navController, categoriesViewModel)
+                "jewelery" -> Jewelery(name, loginViewModel, navController, categoriesViewModel)
+                "men's clothing" -> Mensclothing(name, loginViewModel, navController, categoriesViewModel)
+                "women's clothing" -> WomensClothing(name, loginViewModel, navController, categoriesViewModel)
             }
         }
     }

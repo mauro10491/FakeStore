@@ -37,6 +37,14 @@ class FakeStoreRepository @Inject constructor(private val apiFakeStore: APIFakeS
         return null
     }
 
+    suspend fun getProductsByCategory(category: String) : List<ProductsModel>? {
+        val response = apiFakeStore.getProdcutsByCategory(category)
+        if (response.isSuccessful){
+            return response.body()
+        }
+        return null
+    }
+
     suspend fun getUser(id: Int): UserModel? {
         val response = apiFakeStore.getUser(id)
         if (response.isSuccessful){

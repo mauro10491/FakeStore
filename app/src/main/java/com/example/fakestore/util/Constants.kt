@@ -13,6 +13,8 @@ class Constants {
         //Categories
         const val ENDPOINTCATEGORIES = "products/categories"
 
+        const val ENDPOINTPRODUCTSCATEGORIES = "products/category"
+
         //User
         const val ENDPOINTUSER = "users"
     }
