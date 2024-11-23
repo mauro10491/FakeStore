@@ -38,6 +38,7 @@ import androidx.navigation.NavController
 import com.example.fakestore.components.DrawerContent
 import com.example.fakestore.components.MainTopBar
 import com.example.fakestore.components.UserInfo
+import com.example.fakestore.model.UserModel
 import com.example.fakestore.viewModel.LoginViewModel
 import com.example.fakestore.viewModel.UserViewModel
 import kotlinx.coroutines.launch
@@ -79,15 +80,17 @@ fun UserPerfilView(
     ) {
         Scaffold(
             topBar = {
-                MainTopBar(
-                    title = "User Perfil",
-                    showBackButton = true,
-                    onMenuClick = { scope.launch { drawerState.open() } },
-                    onClickBackButton = { navController.popBackStack() }
-                )
+                user?.let {
+                    MainTopBar(
+                        title = it.username,
+                        showBackButton = true,
+                        onMenuClick = { scope.launch { drawerState.open() } },
+                        onClickBackButton = { navController.popBackStack() }
+                    )
+                }
             },
         ) {
-            ContentUserPerfilView(it)
+            user?.let { it1 -> ContentUserPerfilView(it, it1) }
         }
     }
 
@@ -95,7 +98,7 @@ fun UserPerfilView(
 }
 
 @Composable
-fun ContentUserPerfilView(paddingValues: PaddingValues){
+fun ContentUserPerfilView(paddingValues: PaddingValues, user: UserModel){
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -127,13 +130,13 @@ fun ContentUserPerfilView(paddingValues: PaddingValues){
 
                 Column {
                     Text(
-                        text = "Nombre Completo",
+                        text = user.name.firstname + " " + user.name.lastname,
                         style = MaterialTheme.typography.titleLarge,
                         fontWeight = FontWeight.Bold,
                         color = MaterialTheme.colorScheme.onPrimaryContainer
                     )
                     Text(
-                        text = "UserName",
+                        text = user.username,
                         style = MaterialTheme.typography.bodyMedium,
                         color = MaterialTheme.colorScheme.onPrimaryContainer.copy(alpha = 0.7f)
                     )
@@ -146,9 +149,9 @@ fun ContentUserPerfilView(paddingValues: PaddingValues){
             title = "Titulo",
             icon = Icons.Default.Home,
             content = {
-                UserInfoItem("Ciudad", "Manizales")
-                UserInfoItem("Calle", "Cra 1")
-                UserInfoItem("Código Postal", "17001")
+                UserInfoItem("Ciudad", user.address.city)
+                UserInfoItem("Calle", user.address.street)
+                UserInfoItem("Código Postal", user.address.zipcode)
 
             }
         )
