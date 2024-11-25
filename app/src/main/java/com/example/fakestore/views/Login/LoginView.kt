@@ -51,7 +51,7 @@ fun LoginView(
         TextField(
             value = username,
             onValueChange = { username = it },
-             label = { Text(text = "Username") },
+            label = { Text(text = "Username") },
             modifier = Modifier
                 .fillMaxWidth()
         )
@@ -92,7 +92,6 @@ fun LoginView(
             }else{
                 Text(text = "Login")
             }
-            
         }
 
         Spacer(modifier = Modifier.height(16.dp))

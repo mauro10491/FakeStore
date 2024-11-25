@@ -17,5 +17,8 @@ class Constants {
 
         //User
         const val ENDPOINTUSER = "users"
+
+        //Shopping Cart
+        const val ENDPOINTCART = "carts/user"
     }
 }

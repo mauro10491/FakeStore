@@ -14,7 +14,7 @@ import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
 @HiltViewModel
-class LoginViewModel @Inject constructor(private val repository: FakeStoreRepository) : ViewModel(){
+class LoginViewModel @Inject constructor(private val repository: FakeStoreRepository): ViewModel(){
 
     var token by mutableStateOf<String?>(null)
         private set

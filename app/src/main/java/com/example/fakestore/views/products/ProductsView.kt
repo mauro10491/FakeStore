@@ -60,7 +60,10 @@ fun ProductsView(
                 MainTopBar(
                     title = "Fake Store",
                     showBackButton = false,
-                    onMenuClick = { scope.launch { drawerState.open() } }
+                    onMenuClick = { scope.launch { drawerState.open() } },
+                    onClickCart = {
+                        navController.navigate("ShoppingCartView")
+                    }
                 )
             },
         ) {

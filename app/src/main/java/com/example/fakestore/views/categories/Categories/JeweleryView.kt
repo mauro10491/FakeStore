@@ -70,7 +70,10 @@ fun Jewelery(
                 MainTopBar(
                     title = nameCategory,
                     showBackButton = false,
-                    onMenuClick = { scope.launch { drawerState.open() } }
+                    onMenuClick = { scope.launch { drawerState.open() } },
+                    onClickCart = {
+                        navController.navigate("ShoppingCartView")
+                    }
                 )
             },
         ) {

@@ -10,9 +10,11 @@ import androidx.navigation.navArgument
 import com.example.fakestore.viewModel.CategoriesViewModel
 import com.example.fakestore.viewModel.LoginViewModel
 import com.example.fakestore.viewModel.ProductsViewModel
+import com.example.fakestore.viewModel.ShoppingCartViewModel
 import com.example.fakestore.viewModel.UserViewModel
 import com.example.fakestore.views.categories.CategoriesView
 import com.example.fakestore.views.Login.LoginView
+import com.example.fakestore.views.ShoppingCartView
 import com.example.fakestore.views.UserPerfil.UserPerfilView
 import com.example.fakestore.views.categories.Categories.Electronics
 import com.example.fakestore.views.categories.Categories.Jewelery
@@ -26,7 +28,8 @@ fun NavManager(
     loginViewModel: LoginViewModel,
     productsViewModel: ProductsViewModel,
     categoriesViewModel: CategoriesViewModel,
-    userViewModel: UserViewModel
+    userViewModel: UserViewModel,
+    shoppingCartViewModel: ShoppingCartViewModel
     ){
     val navController = rememberNavController()
     NavHost(navController, startDestination = "LoginView"){
@@ -63,6 +66,9 @@ fun NavManager(
                 "men's clothing" -> Mensclothing(name, loginViewModel, navController, categoriesViewModel)
                 "women's clothing" -> WomensClothing(name, loginViewModel, navController, categoriesViewModel)
             }
+        }
+        composable("ShoppingCartView"){
+            ShoppingCartView(shoppingCartViewModel)
         }
     }
 }

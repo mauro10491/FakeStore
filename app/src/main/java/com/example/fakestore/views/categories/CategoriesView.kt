@@ -65,7 +65,10 @@ fun CategoriesView(
                     title = "Categories",
                     showBackButton = true,
                     onMenuClick = { scope.launch { drawerState.open() } },
-                    onClickBackButton = { navController.popBackStack() }
+                    onClickBackButton = { navController.popBackStack() },
+                    onClickCart = {
+                        navController.navigate("ShoppingCartView")
+                    }
                 )
             },
         ) {

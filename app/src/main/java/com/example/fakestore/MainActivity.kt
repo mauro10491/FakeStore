@@ -13,6 +13,7 @@ import com.example.fakestore.ui.theme.FakeStoreTheme
 import com.example.fakestore.viewModel.CategoriesViewModel
 import com.example.fakestore.viewModel.LoginViewModel
 import com.example.fakestore.viewModel.ProductsViewModel
+import com.example.fakestore.viewModel.ShoppingCartViewModel
 import com.example.fakestore.viewModel.UserViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -24,11 +25,12 @@ class MainActivity : ComponentActivity() {
         val productsViewModel : ProductsViewModel by viewModels()
         val categoriesViewModel : CategoriesViewModel by viewModels()
         val userViewModel : UserViewModel by viewModels()
+        val shoppingCartViewModel : ShoppingCartViewModel by viewModels()
         enableEdgeToEdge()
         setContent {
             FakeStoreTheme {
                 Scaffold( modifier = Modifier.fillMaxSize() ) { innerPadding ->
-                    NavManager(loginViewModel, productsViewModel, categoriesViewModel, userViewModel)
+                    NavManager(loginViewModel, productsViewModel, categoriesViewModel, userViewModel, shoppingCartViewModel)
                 }
             }
         }

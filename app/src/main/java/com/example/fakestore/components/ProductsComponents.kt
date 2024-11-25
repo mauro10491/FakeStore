@@ -57,7 +57,8 @@ fun MainTopBar(
     title: String,
     showBackButton: Boolean = false,
     onClickBackButton: () -> Unit = {},
-    onMenuClick: () -> Unit = {}
+    onMenuClick: () -> Unit = {},
+    onClickCart: () -> Unit
     ){
     TopAppBar(
         title = { Text(text = title, color = Color.Black, fontWeight = FontWeight.ExtraBold) },
@@ -74,6 +75,13 @@ fun MainTopBar(
                 IconButton(onClick = { onClickBackButton() }) {
                     Icon(imageVector = Icons.Default.ArrowBack, contentDescription = null, tint = Color.Black)
                 }
+            }
+            IconButton(onClick = { onClickCart() }) {
+                Icon(
+                    imageVector = Icons.Default.ShoppingCart,
+                    contentDescription = null,
+                    tint = Color.Black
+                )
             }
         }
     )
@@ -257,7 +265,8 @@ fun DrawerContent(
             DrawerMenuItem(icon = Icons.Default.Star, title = "Categorias") {
                 navController.navigate("CategoriesView")
             }
-            DrawerMenuItem(icon = Icons.Default.ShoppingCart, title = "Compras") {
+            DrawerMenuItem(icon = Icons.Default.ShoppingCart, title = "Shopping Cart") {
+                navController.navigate("ShoppingCartView")
             }
             DrawerMenuItem(icon = Icons.Default.Person, title = "Perfil") {
                 navController.navigate("UserPerfilView")
