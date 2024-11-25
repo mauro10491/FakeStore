@@ -68,7 +68,7 @@ fun NavManager(
             }
         }
         composable("ShoppingCartView"){
-            ShoppingCartView(shoppingCartViewModel)
+            ShoppingCartView(shoppingCartViewModel, productsViewModel, navController, loginViewModel)
         }
     }
 }
