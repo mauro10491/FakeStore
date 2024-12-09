@@ -2,6 +2,7 @@ package com.example.fakestore.navigation
 
 import android.util.Log
 import androidx.compose.runtime.Composable
+import androidx.navigation.NavGraph
 import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
@@ -32,43 +33,66 @@ fun NavManager(
     shoppingCartViewModel: ShoppingCartViewModel
     ){
     val navController = rememberNavController()
-    NavHost(navController, startDestination = "LoginView"){
-        composable("LoginView"){
+    NavHost(navController, startDestination = "LoginView") {
+        composable("LoginView") {
             LoginView(loginViewModel, navController)
         }
         composable("ProductsView/{token}", arguments = listOf(
             navArgument("token") { type = NavType.StringType }
         )) {
             val token = it.arguments?.getString("token") ?: ""
-            ProductsView(productsViewModel, loginViewModel, navController)
+            ProductsView(productsViewModel, categoriesViewModel, loginViewModel, navController)
         }
         composable("ProductDetailsView/{id}", arguments = listOf(
             navArgument("id") { type = NavType.IntType }
-        )){
+        )) {
             val id = it.arguments?.getInt("id") ?: 0
             ProductDetailView(navController, productsViewModel, id, loginViewModel)
         }
-        composable("CategoriesView"){
+        composable("CategoriesView") {
             CategoriesView(categoriesViewModel, navController, loginViewModel)
         }
-        composable("UserPerfilView"){
-            UserPerfilView(userViewModel, 1, loginViewModel, navController, )
+        composable("UserPerfilView") {
+            UserPerfilView(userViewModel, 1, loginViewModel, navController,)
         }
         composable("CategoryDetailsView/{name}", arguments = listOf(
             navArgument("name") { type = NavType.StringType }
-        )){
+        )) {
             val name = it.arguments?.getString("name") ?: ""
             Log.d("Category", "Received category: $name")
 
-            when(name){
-                "electronics" -> Electronics(name, loginViewModel, navController, categoriesViewModel)
+            when (name) {
+                "electronics" -> Electronics(
+                    name,
+                    loginViewModel,
+                    navController,
+                    categoriesViewModel
+                )
+
                 "jewelery" -> Jewelery(name, loginViewModel, navController, categoriesViewModel)
-                "men's clothing" -> Mensclothing(name, loginViewModel, navController, categoriesViewModel)
-                "women's clothing" -> WomensClothing(name, loginViewModel, navController, categoriesViewModel)
+                "men's clothing" -> Mensclothing(
+                    name,
+                    loginViewModel,
+                    navController,
+                    categoriesViewModel
+                )
+
+                "women's clothing" -> WomensClothing(
+                    name,
+                    loginViewModel,
+                    navController,
+                    categoriesViewModel
+                )
             }
         }
-        composable("ShoppingCartView"){
-            ShoppingCartView(shoppingCartViewModel, productsViewModel, navController, loginViewModel)
+        composable("ShoppingCartView") {
+            ShoppingCartView(
+                shoppingCartViewModel,
+                productsViewModel,
+                navController,
+                loginViewModel
+            )
         }
     }
+
 }

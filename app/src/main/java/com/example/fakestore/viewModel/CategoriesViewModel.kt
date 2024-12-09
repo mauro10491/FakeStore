@@ -3,6 +3,7 @@ package com.example.fakestore.viewModel
 import androidx.compose.runtime.LongState
 import androidx.compose.runtime.State
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateMapOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
@@ -12,6 +13,7 @@ import com.example.fakestore.repository.FakeStoreRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -23,8 +25,9 @@ class CategoriesViewModel @Inject constructor(private val repository: FakeStoreR
     private val _categories = MutableStateFlow<List<String>>(emptyList())
     val categories =  _categories.asStateFlow()
 
-    private val _products = MutableStateFlow<List<ProductsModel>>(emptyList())
+    private val _products = MutableStateFlow<Map<String, List<ProductsModel>>>(emptyMap())
     val products = _products.asStateFlow()
+
 
     init {
         getCategories()
@@ -41,7 +44,9 @@ class CategoriesViewModel @Inject constructor(private val repository: FakeStoreR
         viewModelScope.launch {
             withContext(Dispatchers.IO){
                 val result = repository.getProductsByCategory(category)
-                _products.value = result ?: emptyList()
+                _products.value = _products.value.toMutableMap().apply {
+                    put(category, result ?: emptyList())
+                }
             }
         }
     }

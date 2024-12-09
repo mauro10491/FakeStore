@@ -28,6 +28,7 @@ import com.example.fakestore.viewModel.CategoriesViewModel
 import com.example.fakestore.viewModel.LoginViewModel
 import com.example.fakestore.viewModel.ProductsViewModel
 import com.example.fakestore.views.products.ContentProductsView
+import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
 import kotlin.jvm.internal.FunInterfaceConstructorReference
 
@@ -48,7 +49,9 @@ fun WomensClothing(
         categoriesViewModel.getProductsByCategory(nameCategory)
     }
 
-    val products by categoriesViewModel.products.collectAsState()
+    val products by categoriesViewModel.products
+        .map { it[nameCategory] ?: emptyList() }
+        .collectAsState(initial = emptyList())
 
     ModalNavigationDrawer(
         drawerState = drawerState,

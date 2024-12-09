@@ -19,7 +19,7 @@ import okhttp3.Dispatcher
 import javax.inject.Inject
 
 @HiltViewModel
-class ProductsViewModel @Inject constructor(private val repository: FakeStoreRepository) :ViewModel() {
+class ProductsViewModel @Inject constructor(private val repository: FakeStoreRepository) : ViewModel() {
 
     private val _products = MutableStateFlow<List<ProductsModel>>(emptyList())
     val products = _products.asStateFlow()
@@ -28,10 +28,10 @@ class ProductsViewModel @Inject constructor(private val repository: FakeStoreRep
         private set
 
     init {
-        fetchProducts()
+        getProducts()
     }
 
-    private fun fetchProducts(){
+    private fun getProducts(){
         viewModelScope.launch {
             withContext(Dispatchers.IO){
                 val results = repository.getProducts()

@@ -34,8 +34,6 @@ class LoginViewModel @Inject constructor(private val repository: FakeStoreReposi
 
                     token?.let { token ->
                         saveUserSession(context, token)
-                    } ?: run {
-                        throw Exception("Token no recibido")
                     }
                 }catch (e: Exception){
                     errorMessage = "Login failed: ${e.message}"

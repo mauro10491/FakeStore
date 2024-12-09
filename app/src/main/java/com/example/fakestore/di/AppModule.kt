@@ -28,5 +28,4 @@ object AppModule {
     fun providesAPiFakeStore(retrofit: Retrofit): APIFakeStore {
         return retrofit.create(APIFakeStore::class.java)
     }
-
 }

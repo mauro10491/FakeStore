@@ -25,7 +25,7 @@ class FakeStoreRepository @Inject constructor(private val apiFakeStore: APIFakeS
         return null
     }
 
-    //
+    //Funcion para traer un producto por id
     suspend fun getProductById(id: Int): ProductsModel? {
         val response = apiFakeStore.getProductById(id)
         if (response.isSuccessful){
@@ -34,6 +34,7 @@ class FakeStoreRepository @Inject constructor(private val apiFakeStore: APIFakeS
         return null
     }
 
+    //Funcion para traer las categorias de la API
     suspend fun getCategories(): List<String>? {
         val response = apiFakeStore.getCategories()
         if(response.isSuccessful){
@@ -42,6 +43,7 @@ class FakeStoreRepository @Inject constructor(private val apiFakeStore: APIFakeS
         return null
     }
 
+    //Funcion para traer los productos por categoria
     suspend fun getProductsByCategory(category: String): List<ProductsModel>? {
         val response = apiFakeStore.getProdcutsByCategory(category)
         if (response.isSuccessful){
@@ -50,6 +52,7 @@ class FakeStoreRepository @Inject constructor(private val apiFakeStore: APIFakeS
         return null
     }
 
+    //Funcion para traer un usuario
     suspend fun getUser(id: Int): UserModel? {
         val response = apiFakeStore.getUser(id)
         if (response.isSuccessful){

@@ -17,6 +17,7 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
+import androidx.compose.material.icons.filled.Delete
 import androidx.compose.material.icons.filled.ExitToApp
 import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.filled.Menu
@@ -43,11 +44,13 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import coil.compose.rememberImagePainter
 import com.example.fakestore.model.ProductsModel
-import kotlinx.coroutines.launch
+import com.example.fakestore.model.ShoppingCartModel
 
 
 //COMPONENTE PARA TOPBAR
@@ -96,13 +99,26 @@ fun CardProducts(
     Card(
         shape = RoundedCornerShape(5.dp),
         modifier = Modifier
-            .padding(10.dp)
+            .width(180.dp)
+            .height(360.dp)
             .shadow(40.dp)
+            .padding(8.dp)
             .clickable { onClick() }
 
     ) {
-        Column {
+        Column(
+            modifier = Modifier
+                .fillMaxSize()
+                .background(Color.LightGray)
+        ) {
             MainImage(image = product.image)
+            Text(
+                text = product.title,
+                maxLines = 2,
+                overflow = TextOverflow.Ellipsis,
+                color = Color.Black,
+                fontSize = 12.sp,
+            )
         }
     }
 }
@@ -137,7 +153,6 @@ fun CardProductsDetails(
                     modifier = Modifier.fillMaxSize(),
                     contentScale = ContentScale.Crop
                 )
-
                 Surface(
                     modifier = Modifier
                         .padding(8.dp)
@@ -212,7 +227,7 @@ fun MainImage(image: String){
         contentScale = ContentScale.Crop,
         modifier = Modifier
             .fillMaxWidth()
-            .height(250.dp)
+            .height(120.dp)
     )
 }
 
@@ -325,6 +340,54 @@ fun DrawerMenuItem(
             )
             Spacer(modifier = Modifier.width(24.dp))
             Text(text = title, style = MaterialTheme.typography.bodyLarge, color = MaterialTheme.colorScheme.onSurface)
+        }
+    }
+}
+
+@Composable
+fun CardCart(
+    product: ProductsModel,
+){
+    Card(
+        onClick = { /*TODO*/ },
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(8.dp),
+        elevation = CardDefaults.cardElevation(4.dp)
+
+    ) {
+        Row(
+            modifier = Modifier
+                .padding(16.dp)
+                .fillMaxWidth(),
+            verticalAlignment = Alignment.CenterVertically,
+            horizontalArrangement = Arrangement.SpaceBetween
+        ){
+            Column{
+                MainImage(image = product.image)
+                Text(
+                    text = product.title,
+                    fontSize = 18.sp,
+                    fontWeight = FontWeight.Bold
+                )
+                Text(
+                    text = product.price.toString(),
+                    fontSize = 14.sp,
+                    color = MaterialTheme.colorScheme.onSurfaceVariant
+                )
+                Text(
+                    text = product.category,
+                    fontSize = 16.sp,
+                    fontWeight = FontWeight.Bold
+                )
+            }
+            IconButton(onClick = { /*TODO*/ }) {
+                Icon(
+                    imageVector = Icons.Default.Delete,
+                    contentDescription = null,
+                    tint = MaterialTheme.colorScheme.error
+                )
+            }
         }
     }
 }

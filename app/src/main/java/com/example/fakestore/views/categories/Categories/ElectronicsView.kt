@@ -28,6 +28,7 @@ import com.example.fakestore.components.MainTopBar
 import com.example.fakestore.viewModel.CategoriesViewModel
 import com.example.fakestore.viewModel.LoginViewModel
 import com.example.fakestore.viewModel.ProductsViewModel
+import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
@@ -46,7 +47,9 @@ fun Electronics(
         categoriesViewModel.getProductsByCategory(nameCategory)
     }
 
-    val products by categoriesViewModel.products.collectAsState()
+    val products by categoriesViewModel.products
+        .map { it[nameCategory] ?: emptyList() }
+        .collectAsState(initial = emptyList())
 
     ModalNavigationDrawer(
         drawerState = drawerState,
